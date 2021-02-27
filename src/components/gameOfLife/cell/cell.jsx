@@ -5,17 +5,32 @@ class Cell extends Component {
   state = {
     id: this.props.id,
     divId: "cell:" + this.props.id[0] + "," + this.props.id[1],
-    life: this.props.life,
   };
-  dims = {
-    width: 20,
-    height: 20,
+  styling = {
+    backgroundColor: "black",
   };
 
+  contextMenu() {
+    return false;
+  }
+
   render() {
-    const cssClass = "cell cell-" + this.state.life;
+    const onMouseDown = this.props.onMouseDown;
+    const onMouseEnter = this.props.onMouseEnter;
+    const onMouseUp = this.props.onMouseUp;
+    const styling = {
+      backgroundColor: this.props.life === "dead" ? "black" : "white",
+    };
     return (
-      <div id={this.state.divId} className={cssClass} style={this.dims}></div>
+      <div
+        id={this.state.divId}
+        className="cell"
+        style={styling}
+        onMouseDown={() => onMouseDown(this.state.id[0], this.state.id[1])}
+        onMouseEnter={() => onMouseEnter(this.state.id[0], this.state.id[1])}
+        onMouseUp={() => onMouseUp()}
+        onContextMenu={(e) => e.preventDefault()}
+      ></div>
     );
   }
 }

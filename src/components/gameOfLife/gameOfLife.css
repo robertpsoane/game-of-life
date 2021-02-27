@@ -8,3 +8,7 @@
   display: inherit;
   height: 20px;
 }
+
+.mini-margin {
+  margin: 10px;
+}

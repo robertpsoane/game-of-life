@@ -4,10 +4,34 @@ class Header extends Component {
   state = {};
   render() {
     return (
-      <header>
-        <h1>Conway's Game of Life</h1>
-        <p>Description about Conway's Game of Life goes here</p>
-      </header>
+      <div>
+        <header>
+          <h1>Conway's Game of Life</h1>
+        </header>
+        <p>
+          Conway's Game of Life (aka <em>Life</em>) was created by{" "}
+          <a href="https://en.wikipedia.org/wiki/John_Horton_Conway">
+            {" "}
+            John Conway
+          </a>
+          . The idea is to simulate life in a 2d grid with a set of simple
+          rules:
+          <ul
+            style={{
+              display: "inline",
+              fontStyle: "italic",
+            }}
+          >
+            <li>A live cell with less than 2 living neighbours dies.</li>
+            <li>A live cell with 2 or 3 live neighbours survives.</li>
+            <li>A live cell with 4+ live neighbours dies.</li>
+            <li>A dead cell with 3 live neighbours comes back to life. </li>
+          </ul>
+          To use this simulation, click on the cells in the grid to bring them
+          to life, and click the start button below to start the simulation.
+        </p>
+        <p></p>
+      </div>
     );
   }
 }
