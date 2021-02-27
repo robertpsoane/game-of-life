@@ -8,7 +8,7 @@ class Header extends Component {
         <header>
           <h1>Conway's Game of Life</h1>
         </header>
-        <p>
+        <p class="mini-margin">
           Conway's Game of Life (aka <em>Life</em>) was created by{" "}
           <a href="https://en.wikipedia.org/wiki/John_Horton_Conway">
             {" "}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Cell from "./cell/cell";
-import Header from "./header/header";
+import Header from "./headerfooter/header";
+import Footer from "./headerfooter/footer";
 import "./gameOfLife.css";
 
 const WIDTH = 50;
@@ -12,11 +13,21 @@ class Controls extends Component {
     return (
       <div class="mini-margin">
         <div class="btn-group " role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-success" style={{ width: 100 }}>
+          <button
+            type="button"
+            class="btn btn-success"
+            style={{ width: 100 }}
+            onClick={this.props.start}
+          >
             Start
           </button>
 
-          <button type="button" class="btn btn-primary" style={{ width: 100 }}>
+          <button
+            type="button"
+            class="btn btn-primary"
+            style={{ width: 100 }}
+            onClick={this.props.pause}
+          >
             Pause
           </button>
 
@@ -38,6 +49,7 @@ class GameOfLife extends Component {
   state = {
     grid: [],
     mouseDown: false,
+    running: false,
   };
 
   // Makes grid on load
@@ -99,6 +111,15 @@ class GameOfLife extends Component {
     return grid;
   };
 
+  startGame() {
+    console.log("started");
+  }
+
+  pauseGame() {
+    console.log("paused");
+    this.setState({ running: false });
+  }
+
   render() {
     const { grid } = this.state;
     return (
@@ -108,7 +129,11 @@ class GameOfLife extends Component {
           <Header />
         </header>
         {/* Adding grid board */}
-        <Controls reset={() => this.componentDidMount()} />
+        <Controls
+          reset={() => this.componentDidMount()}
+          start={() => this.startGame()}
+          pause={() => this.pauseGame()}
+        />
         <div className="board">
           {grid.map((row, rowIdx) => {
             return (
@@ -136,6 +161,7 @@ class GameOfLife extends Component {
             );
           })}
         </div>
+        <Footer />
       </div>
     );
   }
