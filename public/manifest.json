@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Conway's Game of life",
+  "name": "The Game of Life SImulator",
   "icons": [
     {
       "src": "favicon.ico",

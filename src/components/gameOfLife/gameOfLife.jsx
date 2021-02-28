@@ -50,7 +50,7 @@ class GameOfLife extends Component {
     grid: [],
     mouseDown: false,
     running: false,
-    timeOut: 100,
+    timeOut: 250,
     neighbours: [
       [1, 1],
       [1, 0],
@@ -68,6 +68,7 @@ class GameOfLife extends Component {
     const grid = this.makeGrid(WIDTH, HEIGHT);
     this.setState({ grid: grid });
     this.setState({ mouseDown: false });
+    this.setState({ running: false });
   }
 
   // Handles mouse down on grid
@@ -148,23 +149,6 @@ class GameOfLife extends Component {
     return count;
   }
 
-  countDeadNeighbours(grid, row, col) {
-    const neighbours = this.state.neighbours;
-    let count = 0;
-    for (let i = 0; i < 8; i++) {
-      const neighbour = neighbours[i];
-      const rown = row + neighbour[0];
-      const coln = col + neighbour[1];
-      if (rown > 0 && coln > 0 && rown <= HEIGHT && coln <= WIDTH) {
-        console.log(rown, coln);
-        if (grid[rown][coln][0] === 0) {
-          count++;
-        }
-      }
-    }
-    return count;
-  }
-
   runStep() {
     if (!this.state.running) {
       return;
@@ -183,13 +167,12 @@ class GameOfLife extends Component {
             newRow.push([0]);
           }
         } else {
-          const deads = this.countDeadNeighbours(oldGrid, row, col);
-          if (deads < 2) {
-            newRow.push([0]);
-          } else if (deads > 3) {
-            newRow.push([0]);
-          } else {
+          const living = this.countLivingNeighbours(oldGrid, row, col);
+
+          if ((living === 2) | (living === 3)) {
             newRow.push([1]);
+          } else {
+            newRow.push([0]);
           }
         }
       }
@@ -198,6 +181,7 @@ class GameOfLife extends Component {
     this.setState({ grid: newGrid });
 
     this.timeoutHandler = window.setTimeout(() => {
+      console.log(this.state.grid);
       this.runStep();
     }, this.state.timeOut);
   }

@@ -13,8 +13,10 @@ class Footer extends Component {
           .
         </p>
         <p>
-          This was produced by Robert Soane to get exposure to React. To see
-          more of my work, checkout{" "}
+          This was produced by Robert Soane to get exposure to React JS. You can
+          find the code on my{" "}
+          <a href="https://github.com/robertpsoane/game-of-life">GitHub</a>. To
+          see more of my work, checkout{" "}
           <a href="https://robertsoane.me">robertsoane.me</a>
         </p>
       </div>
