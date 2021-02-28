@@ -43,7 +43,7 @@ class About extends Component {
               can find the code on my{" "}
               <a href="https://github.com/robertpsoane/game-of-life">GitHub</a>.
               To see more of my work, checkout{" "}
-              <a href="https://robertsoane.me">robertsoane.me</a>.
+              <a href="https://robertpsoane.github.io">robertsoane.me</a>.
             </p>
             <hr />
             <p>
