@@ -30,7 +30,9 @@ class Header extends Component {
           To use this simulation, click on the cells in the grid to bring them
           to life, and click the start button below to start the simulation.
         </p>
-        <p></p>
+        <div class="alert alert-warning" role="alert">
+          Note: This is currently a work in progress.
+        </div>
       </div>
     );
   }

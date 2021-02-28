@@ -50,6 +50,17 @@ class GameOfLife extends Component {
     grid: [],
     mouseDown: false,
     running: false,
+    timeOut: 100,
+    neighbours: [
+      [1, 1],
+      [1, 0],
+      [1, -1],
+      [0, -1],
+      [-1, -1],
+      [-1, 0],
+      [-1, 1],
+      [0, 1],
+    ],
   };
 
   // Makes grid on load
@@ -70,7 +81,6 @@ class GameOfLife extends Component {
   }
 
   handleMouseEnter(row, col) {
-    console.log(this.state.mouseDown);
     if (!this.state.mouseDown) return;
     this.handleMouseDown(row, col);
   }
@@ -112,12 +122,84 @@ class GameOfLife extends Component {
   };
 
   startGame() {
-    console.log("started");
+    this.setState({ running: true });
+    this.timeoutHandler = window.setTimeout(() => {
+      this.runStep();
+    }, this.state.timeOut);
   }
 
   pauseGame() {
-    console.log("paused");
     this.setState({ running: false });
+  }
+
+  countLivingNeighbours(grid, row, col) {
+    const neighbours = this.state.neighbours;
+    let count = 0;
+    for (let i = 0; i < 8; i++) {
+      const neighbour = neighbours[i];
+      const rown = row + neighbour[0];
+      const coln = col + neighbour[1];
+      if (rown > 0 && coln > 0 && rown < HEIGHT && coln < WIDTH) {
+        if (grid[rown][coln][0] === 1) {
+          count++;
+        }
+      }
+    }
+    return count;
+  }
+
+  countDeadNeighbours(grid, row, col) {
+    const neighbours = this.state.neighbours;
+    let count = 0;
+    for (let i = 0; i < 8; i++) {
+      const neighbour = neighbours[i];
+      const rown = row + neighbour[0];
+      const coln = col + neighbour[1];
+      if (rown > 0 && coln > 0 && rown <= HEIGHT && coln <= WIDTH) {
+        console.log(rown, coln);
+        if (grid[rown][coln][0] === 0) {
+          count++;
+        }
+      }
+    }
+    return count;
+  }
+
+  runStep() {
+    if (!this.state.running) {
+      return;
+    }
+    console.log("RUNNING");
+    let oldGrid = this.state.grid;
+    let newGrid = [];
+
+    for (let row = 0; row < HEIGHT; row++) {
+      let newRow = [];
+      for (let col = 0; col < WIDTH; col++) {
+        if (oldGrid[row][col][0] === 0) {
+          if (this.countLivingNeighbours(oldGrid, row, col) === 3) {
+            newRow.push([1]);
+          } else {
+            newRow.push([0]);
+          }
+        } else {
+          const deads = this.countDeadNeighbours(oldGrid, row, col);
+          if (deads < 2) {
+            newRow.push([0]);
+          } else if (deads > 3) {
+            newRow.push([0]);
+          } else {
+            newRow.push([1]);
+          }
+        }
+      }
+      newGrid.push(newRow);
+    }
+    this.setState({ grid: newGrid });
+
+    this.timeoutHandler = window.setTimeout(() => {
+      this.runStep();
+    }, this.state.timeOut);
   }
 
   render() {
