@@ -12,8 +12,12 @@ class Controls extends Component {
   state = {};
   render() {
     return (
-      <div class="mini-margin">
-        <div class="btn-group " role="group" aria-label="Basic example">
+      <div>
+        <div
+          class="btn-group mini-margin"
+          role="group"
+          aria-label="Basic example"
+        >
           <button
             type="button"
             class="btn btn-success"
