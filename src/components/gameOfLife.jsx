@@ -3,8 +3,8 @@ import Cell from "./cell/cell";
 import Navbar from "./controls/navbar";
 import "./gameOfLife.css";
 
-const WIDTH = 70;
-const HEIGHT = 30;
+const WIDTH = 50;
+const HEIGHT = 25;
 
 class GameOfLife extends Component {
   /** Main entry point to the app. */

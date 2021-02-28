@@ -50,6 +50,12 @@ class About extends Component {
               To see more of my work, checkout{" "}
               <a href="https://robertsoane.me">robertsoane.me</a>.
             </p>
+            <hr />
+            <p>
+              The original simpler version of this React app can be found{" "}
+              <a href="https://robertpsoane.github.io/game-of-life-v1/">here</a>
+              .
+            </p>
           </div>
         </Modal.Body>
         <Modal.Footer>
