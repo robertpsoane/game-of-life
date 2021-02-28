@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 class Footer extends Component {
+  /** Footer - provides a couple of links to wikipedia and my website */
   state = {};
   render() {
     return (

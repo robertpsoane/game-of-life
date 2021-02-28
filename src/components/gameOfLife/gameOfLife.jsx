@@ -8,6 +8,7 @@ const WIDTH = 50;
 const HEIGHT = 25;
 
 class Controls extends Component {
+  /** Set of control buttons, each are passed a function call via props */
   state = {};
   render() {
     return (
@@ -46,6 +47,10 @@ class Controls extends Component {
 }
 
 class GameOfLife extends Component {
+  /** Main entry point to the app. */
+
+  // Maintains state of grid, timeout, whether game is running and
+  // whether mouse button currently down
   state = {
     grid: [],
     mouseDown: false,
@@ -63,30 +68,34 @@ class GameOfLife extends Component {
     ],
   };
 
-  // Makes grid on load
   componentDidMount() {
+    /** Runs on load.  Creates grid and sets initial states.  Also used for
+     * resetting app  */
     const grid = this.makeGrid(WIDTH, HEIGHT);
-    this.setState({ grid: grid });
-    this.setState({ mouseDown: false });
-    this.setState({ running: false });
+    this.setState({ grid: grid, mouseDown: false, running: false });
   }
 
-  // Handles mouse down on grid
   handleMouseDown(row, col) {
-    this.setState({ mouseDown: true });
-    this.setState({ grid: this.changeCell(row, col) });
+    /** Called by cells when clicked - sets mouseDown to true and starts
+     * to change state */
+    this.setState({ mouseDown: true, grid: this.changeCell(row, col) });
   }
 
   handleMouseUp() {
+    /** Sets mouseDown false when mouse button released */
     this.setState({ mouseDown: false });
   }
 
   handleMouseEnter(row, col) {
+    /** Called when mouse over a cell.  If mouse is down, then 'clicks' cell */
     if (!this.state.mouseDown) return;
     this.handleMouseDown(row, col);
   }
 
   changeCell(row, col) {
+    /** Takes a cell and flips value from alive to dead and vice
+     * versa */
+
     let newGrid = this.state.grid;
     // updates grid switching value of element
     if (newGrid[row][col][0] === 0) {
@@ -97,20 +106,8 @@ class GameOfLife extends Component {
     return newGrid;
   }
 
-  //   makeAlive(row, col) {
-  //     let newGrid = this.state.grid;
-  //     newGrid[row][col][0] = 1;
-  //     return newGrid;
-  //   }
-
-  //   makeDead(row, col) {
-  //     let newGrid = this.state.grid;
-  //     newGrid[row][col][0] = 0;
-  //     return newGrid;
-  //   }
-
   makeGrid = (x, y) => {
-    // Produces array of dead cells on a grid
+    /** Produces a grid of dead cells with x columns and y rows */
     const grid = [];
     for (let row = 0; row < y; row++) {
       const currentRow = [];
@@ -123,6 +120,10 @@ class GameOfLife extends Component {
   };
 
   startGame() {
+    /** Starts running game:
+     * - Sets running state to true
+     * - Sets timeout to run a step after the timeout
+     */
     this.setState({ running: true });
     this.timeoutHandler = window.setTimeout(() => {
       this.runStep();
@@ -130,10 +131,14 @@ class GameOfLife extends Component {
   }
 
   pauseGame() {
+    /** Stops running game */
     this.setState({ running: false });
   }
 
   countLivingNeighbours(grid, row, col) {
+    /** Counts number of direct neighbours to a cell that are alive on
+     * a given grid.  Uses neighbours vector to store al permutations
+     */
     const neighbours = this.state.neighbours;
     let count = 0;
     for (let i = 0; i < 8; i++) {
@@ -150,6 +155,12 @@ class GameOfLife extends Component {
   }
 
   runStep() {
+    /** Runs a generation of the Game of Life
+     * - Checks if running
+     * - Iterates over grid, building the grid for the next generation
+     * based on rules of game of life
+     * - Sets a timeout to run again
+     */
     if (!this.state.running) {
       return;
     }
@@ -187,26 +198,29 @@ class GameOfLife extends Component {
   }
 
   render() {
+    /** render function - renders game of life on screen */
     const { grid } = this.state;
     return (
       <div>
-        {/* Adding header with details etc */}
+        {/* Adding header component with Game of Life info */}
         <header>
           <Header />
         </header>
-        {/* Adding grid board */}
+        {/* Adding controls to grid board */}
         <Controls
           reset={() => this.componentDidMount()}
           start={() => this.startGame()}
           pause={() => this.pauseGame()}
         />
+        {/* Render grid of divs representing our board */}
         <div className="board">
           {grid.map((row, rowIdx) => {
             return (
               <div key={rowIdx} className="cellrow">
                 {row.map((col, colIdx) => {
                   const cell_id = [rowIdx, colIdx];
-
+                  // Passes life prop to div based on value of element
+                  // on grid array
                   const life =
                     this.state.grid[rowIdx][colIdx][0] === 1 ? "alive" : "dead";
 
@@ -227,6 +241,7 @@ class GameOfLife extends Component {
             );
           })}
         </div>
+        {/* Adds footer component containing other links to the page */}
         <Footer />
       </div>
     );

@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import "./cell.css";
 
 class Cell extends Component {
+  /** Cell - represents a cell on the board.  Coloured based on
+   * property for life passed in
+   */
   state = {
     id: this.props.id,
     divId: "cell:" + this.props.id[0] + "," + this.props.id[1],

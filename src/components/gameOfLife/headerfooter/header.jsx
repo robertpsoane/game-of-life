@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 
 class Header extends Component {
+  /** Header renders some text about the game of life, and an alert
+   * warning currently WIP
+   */
   state = {};
   render() {
     return (
