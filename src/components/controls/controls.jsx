@@ -15,11 +15,7 @@ class Controls extends Component {
   render() {
     return (
       <div>
-        <div
-          class="btn-group mini-margin"
-          role="group"
-          aria-label="Basic example"
-        >
+        <div class="btn-group" role="group">
           <button
             type="button"
             class="btn btn-success"
@@ -31,13 +27,14 @@ class Controls extends Component {
 
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-danger"
             style={{ width: 100 }}
             onClick={this.props.pause}
           >
             Pause
           </button>
-
+        </div>
+        <div class="btn-group" role="group">
           <button
             type="button"
             class="btn btn-secondary"

@@ -8,20 +8,13 @@ class NavBar extends Component {
       <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
           <div class="container-md">
-            <a class="navbar-brand" href="#">
-              <Header />
-            </a>
-          </div>
-        </nav>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-          <div class="container-md">
-            <a class="navbar-brand" href="#">
+            <div class="navbar-brand">
               <Controls
                 reset={this.props.reset}
                 start={this.props.start}
                 pause={this.props.pause}
               />
-            </a>
+            </div>
           </div>
         </nav>
       </div>
