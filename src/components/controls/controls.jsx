@@ -21,7 +21,7 @@ class Controls extends Component {
           <li
             type="button"
             class="btn btn-danger"
-            style={{ width: 100 }}
+            style={{ width: 100, backgroundColor: "dark-red" }}
             onClick={this.props.pause}
           >
             Pause

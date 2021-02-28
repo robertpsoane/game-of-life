@@ -8,7 +8,7 @@ class instructions extends Component {
     const show = this.props.show;
     const hide = this.props.hide;
     return (
-      <Modal show={show} onHide={hide}>
+      <Modal show={show} onHide={hide} centered>
         <Modal.Header>
           <Modal.Title>Instructions</Modal.Title>
         </Modal.Header>

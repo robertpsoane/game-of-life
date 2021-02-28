@@ -25,7 +25,7 @@ class NavBar extends Component {
   render() {
     return (
       <div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav id="navBar" class="navbar  navbar-dark bg-primary">
           <div class="container-md">
             <div class="navbar-brand">
               <h3 style={{ display: "inline" }}>Conway's Game of Life</h3>

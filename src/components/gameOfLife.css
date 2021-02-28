@@ -7,6 +7,8 @@
 .cellrow {
   display: inherit;
   height: 20px;
+  margin: 0;
+  padding: 0;
 }
 
 .mini-margin {
