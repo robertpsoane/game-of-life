@@ -27,13 +27,8 @@ class About extends Component {
               <li>A live cell with 4+ live neighbours dies.</li>
               <li>A dead cell with 3 live neighbours comes back to life. </li>
             </ol>
-            <hr />
-            To use this simulation, click on the cells in the grid to bring them
-            to life, and click the start button below to start the simulation.
           </p>
-          <div class="alert alert-warning" role="alert">
-            Note: This is currently a work in progress.
-          </div>
+
           <div class="mini-margin">
             <hr />
             <p>
@@ -56,6 +51,9 @@ class About extends Component {
               <a href="https://robertpsoane.github.io/game-of-life-v1/">here</a>
               .
             </p>
+            <div class="alert alert-warning" role="alert">
+              Note: This is currently a work in progress.
+            </div>
           </div>
         </Modal.Body>
         <Modal.Footer>
