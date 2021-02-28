@@ -4,7 +4,7 @@ import Navbar from "./controls/navbar";
 import "./gameOfLife.css";
 import $ from "jquery";
 
-const GRIDSIZE = 20;
+const GRIDSIZE = 25;
 
 class GameOfLife extends Component {
   /** Main entry point to the app. */
