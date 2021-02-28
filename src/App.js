@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { Component } from "react";
 
-import GameOfLife from "./components/gameOfLife/gameOfLife";
+import GameOfLife from "./components/gameOfLife";
 
 class App extends Component {
   state = {};

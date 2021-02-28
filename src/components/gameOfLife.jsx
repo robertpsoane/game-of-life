@@ -2,53 +2,11 @@ import React, { Component } from "react";
 import Cell from "./cell/cell";
 import Header from "./headerfooter/header";
 import Footer from "./headerfooter/footer";
+import Controls from "./controls/controls";
 import "./gameOfLife.css";
 
-const WIDTH = 50;
-const HEIGHT = 25;
-
-class Controls extends Component {
-  /** Set of control buttons, each are passed a function call via props */
-  state = {};
-  render() {
-    return (
-      <div>
-        <div
-          class="btn-group mini-margin"
-          role="group"
-          aria-label="Basic example"
-        >
-          <button
-            type="button"
-            class="btn btn-success"
-            style={{ width: 100 }}
-            onClick={this.props.start}
-          >
-            Start
-          </button>
-
-          <button
-            type="button"
-            class="btn btn-primary"
-            style={{ width: 100 }}
-            onClick={this.props.pause}
-          >
-            Pause
-          </button>
-
-          <button
-            type="button"
-            class="btn btn-secondary"
-            style={{ width: 100 }}
-            onClick={this.props.reset}
-          >
-            Reset
-          </button>
-        </div>
-      </div>
-    );
-  }
-}
+const WIDTH = 70;
+const HEIGHT = 30;
 
 class GameOfLife extends Component {
   /** Main entry point to the app. */
