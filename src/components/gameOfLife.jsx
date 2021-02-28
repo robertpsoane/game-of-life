@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import Cell from "./cell/cell";
-import Header from "./headerfooter/header";
-import Footer from "./headerfooter/footer";
-import Controls from "./controls/controls";
+import Navbar from "./controls/navbar";
 import "./gameOfLife.css";
 
 const WIDTH = 70;
@@ -166,14 +164,14 @@ class GameOfLife extends Component {
       <div>
         {/* Adding header component with Game of Life info */}
         <header>
-          <Header />
+          <Navbar
+            reset={() => this.componentDidMount()}
+            start={() => this.startGame()}
+            pause={() => this.pauseGame()}
+          />
         </header>
         {/* Adding controls to grid board */}
-        <Controls
-          reset={() => this.componentDidMount()}
-          start={() => this.startGame()}
-          pause={() => this.pauseGame()}
-        />
+
         {/* Render grid of divs representing our board */}
         <div className="board">
           {grid.map((row, rowIdx) => {
@@ -203,8 +201,6 @@ class GameOfLife extends Component {
             );
           })}
         </div>
-        {/* Adds footer component containing other links to the page */}
-        <Footer />
       </div>
     );
   }
