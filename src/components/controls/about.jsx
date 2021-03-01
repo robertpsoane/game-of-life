@@ -8,12 +8,12 @@ class About extends Component {
     const show = this.props.show;
     const hide = this.props.hide;
     return (
-      <Modal show={show} onHide={hide}>
+      <Modal show={show} onHide={hide} centered>
         <Modal.Header>
           <Modal.Title>About</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p class="mini-margin">
+          <p className="mini-margin">
             Conway's Game of Life (aka <em>Life</em>) was created by{" "}
             <a href="https://en.wikipedia.org/wiki/John_Horton_Conway">
               {" "}
@@ -29,7 +29,7 @@ class About extends Component {
             </ol>
           </p>
 
-          <div class="mini-margin">
+          <div className="mini-margin">
             <hr />
             <p>
               To find out more about the game, see the{" "}

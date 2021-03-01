@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import Cell from "./cell/cell";
 import Navbar from "./controls/navbar";
 import "./gameOfLife.css";
+import $ from "jquery";
 
-const WIDTH = 50;
-const HEIGHT = 25;
+const GRIDSIZE = 25;
 
 class GameOfLife extends Component {
   /** Main entry point to the app. */
@@ -15,7 +15,7 @@ class GameOfLife extends Component {
     grid: [],
     mouseDown: false,
     running: false,
-    timeOut: 250,
+    timeOut: 500,
     neighbours: [
       [1, 1],
       [1, 0],
@@ -28,10 +28,26 @@ class GameOfLife extends Component {
     ],
   };
 
+  getWidthHeight() {
+    let height;
+    let width;
+    const navHeight = $("#navBar").height();
+    const docHeight = Math.max($(document).height(), $(window).height());
+
+    height = Math.floor((docHeight - navHeight) / GRIDSIZE) - 1;
+
+    width =
+      Math.floor(Math.max($(document).width(), $(window).width()) / GRIDSIZE) -
+      1;
+
+    return [width, height];
+  }
+
   componentDidMount() {
     /** Runs on load.  Creates grid and sets initial states.  Also used for
      * resetting app  */
-    const grid = this.makeGrid(WIDTH, HEIGHT);
+    const dims = this.getWidthHeight();
+    const grid = this.makeGrid(dims[0], dims[1]);
     this.setState({ grid: grid, mouseDown: false, running: false });
   }
 
@@ -44,6 +60,11 @@ class GameOfLife extends Component {
   handleMouseUp() {
     /** Sets mouseDown false when mouse button released */
     this.setState({ mouseDown: false });
+  }
+
+  setTimeOut() {
+    const new_time = 1000 - $("#time-out-slider").val();
+    this.setState({ timeOut: new_time });
   }
 
   handleMouseEnter(row, col) {
@@ -99,13 +120,14 @@ class GameOfLife extends Component {
     /** Counts number of direct neighbours to a cell that are alive on
      * a given grid.  Uses neighbours vector to store al permutations
      */
+    const dims = this.getWidthHeight();
     const neighbours = this.state.neighbours;
     let count = 0;
     for (let i = 0; i < 8; i++) {
       const neighbour = neighbours[i];
       const rown = row + neighbour[0];
       const coln = col + neighbour[1];
-      if (rown > 0 && coln > 0 && rown < HEIGHT && coln < WIDTH) {
+      if (rown > 0 && coln > 0 && rown < dims[1] && coln < dims[0]) {
         if (grid[rown][coln][0] === 1) {
           count++;
         }
@@ -124,13 +146,13 @@ class GameOfLife extends Component {
     if (!this.state.running) {
       return;
     }
-    console.log("RUNNING");
+    const dims = this.getWidthHeight();
     let oldGrid = this.state.grid;
     let newGrid = [];
 
-    for (let row = 0; row < HEIGHT; row++) {
+    for (let row = 0; row < dims[1]; row++) {
       let newRow = [];
-      for (let col = 0; col < WIDTH; col++) {
+      for (let col = 0; col < dims[0]; col++) {
         if (oldGrid[row][col][0] === 0) {
           if (this.countLivingNeighbours(oldGrid, row, col) === 3) {
             newRow.push([1]);
@@ -152,7 +174,7 @@ class GameOfLife extends Component {
     this.setState({ grid: newGrid });
 
     this.timeoutHandler = window.setTimeout(() => {
-      console.log(this.state.grid);
+      console.log(this.state.timeOut);
       this.runStep();
     }, this.state.timeOut);
   }
@@ -168,6 +190,7 @@ class GameOfLife extends Component {
             reset={() => this.componentDidMount()}
             start={() => this.startGame()}
             pause={() => this.pauseGame()}
+            timeOut={() => this.setTimeOut()}
           />
         </header>
         {/* Adding controls to grid board */}

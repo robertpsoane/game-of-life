@@ -8,7 +8,7 @@ class instructions extends Component {
     const show = this.props.show;
     const hide = this.props.hide;
     return (
-      <Modal show={show} onHide={hide}>
+      <Modal show={show} onHide={hide} centered>
         <Modal.Header>
           <Modal.Title>Instructions</Modal.Title>
         </Modal.Header>
@@ -28,11 +28,11 @@ class instructions extends Component {
               Click <code>Start</code> to start the game, <code>Pause</code> to
               stop the game, and <code>Reset</code> to reset the board{" "}
             </li>
+            <li>The speed of the animation can be changed in settings.</li>
           </ul>
 
           <div class="alert alert-warning" role="alert">
-            These instructions can be brought up again by clicking on the How-To
-            button.
+            These instructions can be brought up again from the Settings menu.
           </div>
         </Modal.Body>
         <Modal.Footer>
