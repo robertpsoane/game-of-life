@@ -26,6 +26,7 @@ class GameOfLife extends Component {
       [-1, 1],
       [0, 1],
     ],
+    dims: [1, 1],
   };
 
   getWidthHeight() {
@@ -48,7 +49,7 @@ class GameOfLife extends Component {
      * resetting app  */
     const dims = this.getWidthHeight();
     const grid = this.makeGrid(dims[0], dims[1]);
-    this.setState({ grid: grid, mouseDown: false, running: false });
+    this.setState({ grid: grid, mouseDown: false, running: false, dims: dims });
   }
 
   handleMouseDown(row, col) {
@@ -120,7 +121,7 @@ class GameOfLife extends Component {
     /** Counts number of direct neighbours to a cell that are alive on
      * a given grid.  Uses neighbours vector to store al permutations
      */
-    const dims = this.getWidthHeight();
+    const dims = this.state.dims;
     const neighbours = this.state.neighbours;
     let count = 0;
     for (let i = 0; i < 8; i++) {
@@ -146,7 +147,7 @@ class GameOfLife extends Component {
     if (!this.state.running) {
       return;
     }
-    const dims = this.getWidthHeight();
+    const dims = this.state.dims;
     let oldGrid = this.state.grid;
     let newGrid = [];
 
