@@ -6,6 +6,52 @@ import $ from "jquery";
 
 const GRIDSIZE = 25;
 
+const PATTERN_GRIDS = {
+  gosper: {
+    grid: [
+      [0, -6],
+      [-1, -5],
+      [-1, -6],
+      [-1, -7],
+      [-2, -4],
+      [-2, -8],
+      [-3, -6],
+      [-4, -3],
+      [-5, -3],
+      [-6, -4],
+      [-7, -5],
+      [-7, -6],
+      [-7, -7],
+      [-4, -9],
+      [-5, -9],
+      [-6, -8],
+      [-16, -6],
+      [-16, -7],
+      [-17, -6],
+      [-17, -7],
+      [3, -7],
+      [3, -8],
+      [3, -9],
+      [4, -7],
+      [4, -8],
+      [4, -9],
+      [5, -6],
+      [5, -10],
+      [7, -5],
+      [7, -6],
+      [7, -10],
+      [7, -11],
+      [17, -8],
+      [17, -9],
+      [18, -8],
+      [18, -9],
+    ],
+    min_rows: 22,
+    min_cols: 36,
+  },
+  test: { grid: [0, 0], min_rows: 1, min_cols: 1 },
+};
+
 class GameOfLife extends Component {
   /** Main entry point to the app. */
 
@@ -26,8 +72,10 @@ class GameOfLife extends Component {
       [-1, 1],
       [0, 1],
     ],
+    dims: [1, 1],
   };
 
+  // Useful function to get width of height of document in squares
   getWidthHeight() {
     let height;
     let width;
@@ -48,9 +96,10 @@ class GameOfLife extends Component {
      * resetting app  */
     const dims = this.getWidthHeight();
     const grid = this.makeGrid(dims[0], dims[1]);
-    this.setState({ grid: grid, mouseDown: false, running: false });
+    this.setState({ grid: grid, mouseDown: false, running: false, dims: dims });
   }
 
+  // Handlers
   handleMouseDown(row, col) {
     /** Called by cells when clicked - sets mouseDown to true and starts
      * to change state */
@@ -73,6 +122,32 @@ class GameOfLife extends Component {
     this.handleMouseDown(row, col);
   }
 
+  // Pattern Handlers
+  handlePattern(patternType) {
+    const livingCells = PATTERN_GRIDS[patternType]["grid"];
+    const center = this.getMidPoint();
+    const grid = this.state.grid;
+    livingCells.forEach((cell) => {
+      const centerRow = center[1];
+      const centerCol = center[0];
+      const shiftRow = cell[1];
+      const shiftCol = cell[0];
+      console.log(centerRow + shiftRow, centerCol + shiftCol);
+      grid[centerRow + shiftRow][centerCol + shiftCol][0] = 1;
+    });
+    this.setState({ grid: grid });
+  }
+
+  getMidPoint() {
+    const dims = this.state.dims;
+    console.log(dims);
+    const xCenter = Math.floor(dims[0] / 2);
+    const yCenter = Math.floor(dims[1] / 2);
+
+    return [xCenter, yCenter];
+  }
+
+  // Grid Processing
   changeCell(row, col) {
     /** Takes a cell and flips value from alive to dead and vice
      * versa */
@@ -100,6 +175,7 @@ class GameOfLife extends Component {
     return grid;
   };
 
+  // Run Animation
   startGame() {
     /** Starts running game:
      * - Sets running state to true
@@ -120,7 +196,7 @@ class GameOfLife extends Component {
     /** Counts number of direct neighbours to a cell that are alive on
      * a given grid.  Uses neighbours vector to store al permutations
      */
-    const dims = this.getWidthHeight();
+    const dims = this.state.dims;
     const neighbours = this.state.neighbours;
     let count = 0;
     for (let i = 0; i < 8; i++) {
@@ -146,7 +222,7 @@ class GameOfLife extends Component {
     if (!this.state.running) {
       return;
     }
-    const dims = this.getWidthHeight();
+    const dims = this.state.dims;
     let oldGrid = this.state.grid;
     let newGrid = [];
 
@@ -179,14 +255,19 @@ class GameOfLife extends Component {
     }, this.state.timeOut);
   }
 
+  // Render Function
   render() {
     /** render function - renders game of life on screen */
     const { grid } = this.state;
+    const width_height = this.getWidthHeight();
     return (
       <div>
         {/* Adding header component with Game of Life info */}
         <header>
           <Navbar
+            grid_wh={width_height}
+            pattern={(p) => this.handlePattern(p)}
+            pattern_grid={PATTERN_GRIDS}
             reset={() => this.componentDidMount()}
             start={() => this.startGame()}
             pause={() => this.pauseGame()}
