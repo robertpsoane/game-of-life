@@ -51,7 +51,7 @@ class About extends Component {
               <a href="https://robertpsoane.github.io/game-of-life-v1/">here</a>
               .
             </p>
-            <div class="alert alert-warning" role="alert">
+            <div className="alert alert-warning" role="alert">
               Note: This is currently a work in progress.
             </div>
           </div>
@@ -59,7 +59,7 @@ class About extends Component {
         <Modal.Footer>
           <button
             type="button"
-            class="btn btn-primary"
+            className="btn btn-primary"
             style={{ width: 100 }}
             onClick={hide}
           >

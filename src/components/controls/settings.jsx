@@ -24,11 +24,11 @@ class Settings extends Component {
 
   render() {
     return (
-      <ul class="btn-group controller" role="group">
+      <ul className="btn-group controller" role="group">
         <div className="dropdown">
           {/* Settings button */}
           <div
-            class="btn btn-secondary dropdown-toggle"
+            className="btn btn-secondary dropdown-toggle"
             type="button"
             id="dropdownMenuButton"
             data-toggle="dropdown"
@@ -44,13 +44,13 @@ class Settings extends Component {
             aria-labelledby="dropdownMenuButton"
           >
             <div className="dropdown-item">
-              <label for="time-out-slider" class="form-label">
+              <label for="time-out-slider" className="form-label">
                 Speed
               </label>
               <br />
               <input
                 type="range"
-                class="form-range"
+                className="form-range"
                 id="time-out-slider"
                 min="0"
                 max="980"
@@ -62,7 +62,7 @@ class Settings extends Component {
             <hr />
             <a
               type="button"
-              class="dropdown-item"
+              className="dropdown-item"
               onClick={() => {
                 this.showHowTo();
               }}
@@ -71,7 +71,7 @@ class Settings extends Component {
             </a>
             <a
               type="button"
-              class="dropdown-item"
+              className="dropdown-item"
               onClick={() => {
                 this.showAbout();
               }}

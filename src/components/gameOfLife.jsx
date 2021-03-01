@@ -49,6 +49,60 @@ const PATTERN_GRIDS = {
     min_rows: 22,
     min_cols: 36,
   },
+  pulsar: {
+    grid: [
+      [-1, 2],
+      [-1, 3],
+      [-1, 4],
+      [-1, -2],
+      [-1, -3],
+      [-1, -4],
+      [1, 2],
+      [1, 3],
+      [1, 4],
+      [1, -2],
+      [1, -3],
+      [1, -4],
+      [2, 1],
+      [3, 1],
+      [4, 1],
+      [-2, 1],
+      [-3, 1],
+      [-4, 1],
+      [2, -1],
+      [3, -1],
+      [4, -1],
+      [-2, -1],
+      [-3, -1],
+      [-4, -1],
+      [2, 6],
+      [3, 6],
+      [4, 6],
+      [-2, 6],
+      [-3, 6],
+      [-4, 6],
+      [2, -6],
+      [3, -6],
+      [4, -6],
+      [-2, -6],
+      [-3, -6],
+      [-4, -6],
+      [-6, 2],
+      [-6, 3],
+      [-6, 4],
+      [-6, -2],
+      [-6, -3],
+      [-6, -4],
+      [6, 2],
+      [6, 3],
+      [6, 4],
+      [6, -2],
+      [6, -3],
+      [6, -4],
+    ],
+    min_rows: 8,
+    min_cols: 8,
+  },
   test: { grid: [0, 0], min_rows: 1, min_cols: 1 },
 };
 
@@ -132,7 +186,7 @@ class GameOfLife extends Component {
       const centerCol = center[0];
       const shiftRow = cell[1];
       const shiftCol = cell[0];
-      console.log(centerRow + shiftRow, centerCol + shiftCol);
+
       grid[centerRow + shiftRow][centerCol + shiftCol][0] = 1;
     });
     this.setState({ grid: grid });
@@ -140,7 +194,7 @@ class GameOfLife extends Component {
 
   getMidPoint() {
     const dims = this.state.dims;
-    console.log(dims);
+
     const xCenter = Math.floor(dims[0] / 2);
     const yCenter = Math.floor(dims[1] / 2);
 
@@ -250,7 +304,6 @@ class GameOfLife extends Component {
     this.setState({ grid: newGrid });
 
     this.timeoutHandler = window.setTimeout(() => {
-      console.log(this.state.timeOut);
       this.runStep();
     }, this.state.timeOut);
   }

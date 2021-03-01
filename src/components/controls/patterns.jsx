@@ -16,12 +16,12 @@ class PatternLink extends Component {
     return (
       <a
         type="button"
-        class={link_class}
+        className={link_class}
         onClick={() => {
-          this.props.patternFunc("gosper");
+          this.props.patternFunc(this.props.pattern_arg);
         }}
       >
-        Gosper Glider Gun
+        {this.props.text}
       </a>
     );
   }
@@ -33,11 +33,11 @@ class Patterns extends Component {
     const patterns = this.props.pattern_grid;
     const grid_dims = this.props.grid_wh;
     return (
-      <div class="btn-group controller" role="group">
+      <div className="btn-group controller" role="group">
         <div className="dropdown">
           {/* Settings button */}
           <div
-            class="btn btn-secondary dropdown-toggle"
+            className="btn btn-secondary dropdown-toggle"
             type="button"
             id="dropdownMenuButton"
             data-toggle="dropdown"
@@ -53,13 +53,22 @@ class Patterns extends Component {
             aria-labelledby="dropdownMenuButton"
           >
             <PatternLink
+              text="Pulsar"
+              pattern_arg="pulsar"
               grid_dims={grid_dims}
+              pattern_params={patterns["pulsar"]}
+              patternFunc={this.props.pattern}
+            />
+            <PatternLink
+              text="Gosper Glider Gun"
+              grid_dims={grid_dims}
+              pattern_arg="gosper"
               pattern_params={patterns["gosper"]}
               patternFunc={this.props.pattern}
             />
             <a
               type="button"
-              class="dropdown-item"
+              className="dropdown-item"
               onClick={() => {
                 console.log(patterns["test"]);
               }}

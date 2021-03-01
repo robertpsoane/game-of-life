@@ -12,7 +12,7 @@ class instructions extends Component {
         <Modal.Header>
           <Modal.Title>Instructions</Modal.Title>
         </Modal.Header>
-        <div class="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert">
           Note: This version is currently under construction. The original
           version can be found{" "}
           <a href="https://robertsoane.me/game-of-life-v1/">here</a>.
@@ -31,14 +31,14 @@ class instructions extends Component {
             <li>The speed of the animation can be changed in settings.</li>
           </ul>
 
-          <div class="alert alert-warning" role="alert">
+          <div className="alert alert-warning" role="alert">
             These instructions can be brought up again from the Settings menu.
           </div>
         </Modal.Body>
         <Modal.Footer>
           <button
             type="button"
-            class="btn btn-primary"
+            className="btn btn-primary"
             style={{ width: 100 }}
             onClick={hide}
           >

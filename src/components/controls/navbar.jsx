@@ -9,8 +9,8 @@ class NavBar extends Component {
   // Note could be bg-info instead of primary for navbar
   render() {
     return (
-      <nav id="navBar" class="navbar  navbar-dark bg-primary">
-        <div class="container-md navbar-brand">
+      <nav id="navBar" className="navbar  navbar-dark bg-primary">
+        <div className="container-md navbar-brand">
           <h3>The Game of Life</h3>
           <StartStop start={this.props.start} pause={this.props.pause} />
           <Reset reset={this.props.reset} />

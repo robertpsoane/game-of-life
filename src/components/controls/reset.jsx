@@ -8,10 +8,10 @@ class Reset extends Component {
   render() {
     return (
       <div style={{ display: "inline" }}>
-        <ul class="btn-group controller" role="group">
+        <ul className="btn-group controller" role="group">
           <li
             type="button"
-            class="btn btn-secondary"
+            className="btn btn-secondary"
             style={{ width: 100 }}
             onClick={this.props.reset}
           >
