@@ -1,5 +1,5 @@
 To Do:
 
-- Add slider to change speed
+- Patterns
 - Fix nav bar to layout sensibly
 - Produce version to work on mobile screens
