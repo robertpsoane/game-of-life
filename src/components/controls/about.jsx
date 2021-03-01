@@ -14,7 +14,7 @@ class About extends Component {
         </Modal.Header>
         <Modal.Body>
           <p className="mini-margin">
-            The Game of Life (aka <em>Life</em>) was created by{" "}
+            Conway's Game of Life (aka <em>Life</em>) was created by{" "}
             <a href="https://en.wikipedia.org/wiki/John_Horton_Conway">
               {" "}
               John Conway
