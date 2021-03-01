@@ -6,6 +6,106 @@ import $ from "jquery";
 
 const GRIDSIZE = 25;
 
+const PATTERN_GRIDS = {
+  gosper: {
+    grid: [
+      [0, -6],
+      [-1, -5],
+      [-1, -6],
+      [-1, -7],
+      [-2, -4],
+      [-2, -8],
+      [-3, -6],
+      [-4, -3],
+      [-5, -3],
+      [-6, -4],
+      [-7, -5],
+      [-7, -6],
+      [-7, -7],
+      [-4, -9],
+      [-5, -9],
+      [-6, -8],
+      [-16, -6],
+      [-16, -7],
+      [-17, -6],
+      [-17, -7],
+      [3, -7],
+      [3, -8],
+      [3, -9],
+      [4, -7],
+      [4, -8],
+      [4, -9],
+      [5, -6],
+      [5, -10],
+      [7, -5],
+      [7, -6],
+      [7, -10],
+      [7, -11],
+      [17, -8],
+      [17, -9],
+      [18, -8],
+      [18, -9],
+    ],
+    min_rows: 22,
+    min_cols: 36,
+  },
+  pulsar: {
+    grid: [
+      [-1, 2],
+      [-1, 3],
+      [-1, 4],
+      [-1, -2],
+      [-1, -3],
+      [-1, -4],
+      [1, 2],
+      [1, 3],
+      [1, 4],
+      [1, -2],
+      [1, -3],
+      [1, -4],
+      [2, 1],
+      [3, 1],
+      [4, 1],
+      [-2, 1],
+      [-3, 1],
+      [-4, 1],
+      [2, -1],
+      [3, -1],
+      [4, -1],
+      [-2, -1],
+      [-3, -1],
+      [-4, -1],
+      [2, 6],
+      [3, 6],
+      [4, 6],
+      [-2, 6],
+      [-3, 6],
+      [-4, 6],
+      [2, -6],
+      [3, -6],
+      [4, -6],
+      [-2, -6],
+      [-3, -6],
+      [-4, -6],
+      [-6, 2],
+      [-6, 3],
+      [-6, 4],
+      [-6, -2],
+      [-6, -3],
+      [-6, -4],
+      [6, 2],
+      [6, 3],
+      [6, 4],
+      [6, -2],
+      [6, -3],
+      [6, -4],
+    ],
+    min_rows: 8,
+    min_cols: 8,
+  },
+  test: { grid: [0, 0], min_rows: 1, min_cols: 1 },
+};
+
 class GameOfLife extends Component {
   /** Main entry point to the app. */
 
@@ -71,6 +171,31 @@ class GameOfLife extends Component {
     /** Called when mouse over a cell.  If mouse is down, then 'clicks' cell */
     if (!this.state.mouseDown) return;
     this.handleMouseDown(row, col);
+  }
+
+  // Pattern Handlers
+  handlePattern(patternType) {
+    const livingCells = PATTERN_GRIDS[patternType]["grid"];
+    const center = this.getMidPoint();
+    const grid = this.state.grid;
+    livingCells.forEach((cell) => {
+      const centerRow = center[1];
+      const centerCol = center[0];
+      const shiftRow = cell[1];
+      const shiftCol = cell[0];
+
+      grid[centerRow + shiftRow][centerCol + shiftCol][0] = 1;
+    });
+    this.setState({ grid: grid });
+  }
+
+  getMidPoint() {
+    const dims = this.getWidthHeight();
+
+    const xCenter = Math.floor(dims[0] / 2);
+    const yCenter = Math.floor(dims[1] / 2);
+
+    return [xCenter, yCenter];
   }
 
   changeCell(row, col) {
@@ -187,6 +312,9 @@ class GameOfLife extends Component {
         {/* Adding header component with Game of Life info */}
         <header>
           <Navbar
+            grid_wh={this.getWidthHeight()}
+            pattern={(p) => this.handlePattern(p)}
+            pattern_grid={PATTERN_GRIDS}
             reset={() => this.componentDidMount()}
             start={() => this.startGame()}
             pause={() => this.pauseGame()}
