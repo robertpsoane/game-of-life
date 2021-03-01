@@ -15,7 +15,7 @@ class GameOfLife extends Component {
     grid: [],
     mouseDown: false,
     running: false,
-    timeOut: 250,
+    timeOut: 500,
     neighbours: [
       [1, 1],
       [1, 0],
@@ -60,6 +60,11 @@ class GameOfLife extends Component {
   handleMouseUp() {
     /** Sets mouseDown false when mouse button released */
     this.setState({ mouseDown: false });
+  }
+
+  setTimeOut() {
+    const new_time = 1000 - $("#time-out-slider").val();
+    this.setState({ timeOut: new_time });
   }
 
   handleMouseEnter(row, col) {
@@ -169,7 +174,7 @@ class GameOfLife extends Component {
     this.setState({ grid: newGrid });
 
     this.timeoutHandler = window.setTimeout(() => {
-      console.log(this.state.grid);
+      console.log(this.state.timeOut);
       this.runStep();
     }, this.state.timeOut);
   }
@@ -185,6 +190,7 @@ class GameOfLife extends Component {
             reset={() => this.componentDidMount()}
             start={() => this.startGame()}
             pause={() => this.pauseGame()}
+            timeOut={() => this.setTimeOut()}
           />
         </header>
         {/* Adding controls to grid board */}
