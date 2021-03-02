@@ -28,9 +28,13 @@ class instructions extends Component {
               Click <code>Start</code> to start the game, <code>Pause</code> to
               stop the game, and <code>Reset</code> to reset the board{" "}
             </li>
-            <li>The speed of the animation can be changed in settings.</li>
             <li>
-              Interesting well-known patterns can be loaded from the patterns
+              The speed of the animation can be changed in <code>Settings</code>
+              .
+            </li>
+            <li>
+              Interesting well-known patterns can be loaded from the{" "}
+              <code>Patterns</code>
               tab.
             </li>
           </ul>
