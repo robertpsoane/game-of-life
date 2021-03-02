@@ -21,7 +21,7 @@ class StartStop extends Component {
           style={{ width: 100, backgroundColor: "dark-red" }}
           onClick={this.props.pause}
         >
-          Pause
+          Stop
         </div>
       </div>
     );

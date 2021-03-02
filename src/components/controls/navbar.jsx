@@ -14,6 +14,7 @@ class NavBar extends Component {
           <span class="navbar-brand mb-0 h2">Game of Life</span>
 
           <StartStop start={this.props.start} pause={this.props.pause} />
+
           <Reset reset={this.props.reset} />
 
           <Patterns
