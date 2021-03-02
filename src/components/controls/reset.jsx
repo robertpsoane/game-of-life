@@ -7,17 +7,15 @@ class Reset extends Component {
 
   render() {
     return (
-      <div style={{ display: "inline" }}>
-        <ul class="btn-group controller" role="group">
-          <li
-            type="button"
-            class="btn btn-secondary"
-            style={{ width: 100 }}
-            onClick={this.props.reset}
-          >
-            Reset
-          </li>
-        </ul>
+      <div>
+        <div
+          type="button"
+          class="btn btn-secondary"
+          style={{ width: 100 }}
+          onClick={this.props.reset}
+        >
+          Reset
+        </div>
       </div>
     );
   }

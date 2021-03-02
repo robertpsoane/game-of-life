@@ -24,61 +24,59 @@ class Settings extends Component {
 
   render() {
     return (
-      <ul class="btn-group controller" role="group">
-        <div className="dropdown">
-          {/* Settings button */}
-          <div
-            class="btn btn-secondary dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Settings
-          </div>
+      <div className="dropdown">
+        {/* Settings button */}
+        <div
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Settings
+        </div>
 
-          {/* Settings Drop Down */}
-          <div
-            className="dropdown-menu dropdown-menu-right"
-            aria-labelledby="dropdownMenuButton"
-          >
-            <div className="dropdown-item">
-              <label for="time-out-slider" class="form-label">
-                Speed
-              </label>
-              <br />
-              <input
-                type="range"
-                class="form-range"
-                id="time-out-slider"
-                min="0"
-                max="799"
-                step="1"
-                defaultValue="400"
-                onChange={this.props.setTime}
-              ></input>
-            </div>
-            <hr />
-            <a
-              type="button"
-              class="dropdown-item"
-              onClick={() => {
-                this.showHowTo();
-              }}
-            >
-              Help
-            </a>
-            <a
-              type="button"
-              class="dropdown-item"
-              onClick={() => {
-                this.showAbout();
-              }}
-            >
-              About
-            </a>
+        {/* Settings Drop Down */}
+        <div
+          className="dropdown-menu dropdown-menu-right"
+          aria-labelledby="dropdownMenuButton"
+        >
+          <div className="dropdown-item">
+            <label for="time-out-slider" class="form-label">
+              Speed
+            </label>
+            <br />
+            <input
+              type="range"
+              class="form-range"
+              id="time-out-slider"
+              min="0"
+              max="799"
+              step="1"
+              defaultValue="400"
+              onChange={this.props.setTime}
+            ></input>
           </div>
+          <hr />
+          <a
+            type="button"
+            class="dropdown-item"
+            onClick={() => {
+              this.showHowTo();
+            }}
+          >
+            Help
+          </a>
+          <a
+            type="button"
+            class="dropdown-item"
+            onClick={() => {
+              this.showAbout();
+            }}
+          >
+            About
+          </a>
         </div>
         {/** Modals go here */}
         <About
@@ -93,7 +91,7 @@ class Settings extends Component {
             this.hideHowTo();
           }}
         />
-      </ul>
+      </div>
     );
   }
 }

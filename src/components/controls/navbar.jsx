@@ -10,10 +10,12 @@ class NavBar extends Component {
   render() {
     return (
       <nav id="navBar" className="navbar  navbar-dark bg-primary">
-        <div className="container-md navbar-brand">
-          <h3>The Game of Life</h3>
+        <div className="container">
+          <span class="navbar-brand mb-0 h2">Game of Life</span>
+
           <StartStop start={this.props.start} pause={this.props.pause} />
           <Reset reset={this.props.reset} />
+
           <Patterns
             pattern_grid={this.props.pattern_grid}
             pattern={this.props.pattern}

@@ -5,25 +5,25 @@ class StartStop extends Component {
   state = {};
   render() {
     return (
-      <ul class="btn-group controller" role="group">
-        <li
+      <div class="btn-group" role="group">
+        <div
           type="button"
           class="btn btn-success"
           style={{ width: 100 }}
           onClick={this.props.start}
         >
           Start
-        </li>
+        </div>
 
-        <li
+        <div
           type="button"
           class="btn btn-danger"
           style={{ width: 100, backgroundColor: "dark-red" }}
           onClick={this.props.pause}
         >
           Pause
-        </li>
-      </ul>
+        </div>
+      </div>
     );
   }
 }
