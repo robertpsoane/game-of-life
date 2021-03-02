@@ -17,7 +17,7 @@ class NavBar extends Component {
           <Patterns
             pattern_grid={this.props.pattern_grid}
             pattern={this.props.pattern}
-            grid_wh={this.props.grid_wh}
+            grid_dims={this.props.grid_dims}
           />
           <Settings setTime={this.props.timeOut} />
         </div>

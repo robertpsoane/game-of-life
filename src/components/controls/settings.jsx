@@ -53,9 +53,9 @@ class Settings extends Component {
                 class="form-range"
                 id="time-out-slider"
                 min="0"
-                max="980"
-                step="10"
-                defaultValue="500"
+                max="799"
+                step="1"
+                defaultValue="400"
                 onChange={this.props.setTime}
               ></input>
             </div>

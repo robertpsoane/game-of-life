@@ -103,7 +103,111 @@ const PATTERN_GRIDS = {
     min_rows: 8,
     min_cols: 8,
   },
-  test: { grid: [0, 0], min_rows: 1, min_cols: 1 },
+  blinker: {
+    grid: [
+      [1, 0],
+      [0, 0],
+      [-1, 0],
+    ],
+
+    min_rows: 6,
+    min_cols: 6,
+  },
+  beacon: {
+    grid: [
+      [0, 0],
+      [-1, 0],
+      [-1, -1],
+      [0, -1],
+      [1, 1],
+      [1, 2],
+      [2, 1],
+      [2, 2],
+    ],
+    min_rows: 6,
+    min_cols: 6,
+  },
+  pentadecathlon: {
+    grid: [
+      [0, 0],
+      [0, 1],
+      [0, 2],
+      [0, 4],
+      [0, 5],
+      [0, -1],
+      [0, -3],
+      [0, -4],
+      [1, 3],
+      [1, -2],
+      [-1, 3],
+      [-1, -2],
+    ],
+    min_rows: 16,
+    min_cols: 10,
+  },
+  glider: {
+    grid: [
+      [-1, 1],
+      [0, 1],
+      [1, 1],
+      [1, 0],
+      [0, -1],
+    ],
+    min_rows: 5,
+    min_cols: 5,
+  },
+  lwss: {
+    grid: [
+      [-2, -1],
+      [-2, 1],
+      [-1, 2],
+      [0, 2],
+      [1, 2],
+      [1, -1],
+      [2, 0],
+      [2, 1],
+      [2, 2],
+    ],
+    min_rows: 7,
+    min_cols: 6,
+  },
+  mwss: {
+    grid: [
+      [-3, 0],
+      [-3, 1],
+      [-3, 2],
+      [-2, -1],
+      [-2, 2],
+      [-1, 2],
+      [0, -2],
+      [0, 2],
+      [1, 2],
+      [2, 1],
+      [2, -1],
+    ],
+    min_rows: 7,
+    min_cols: 8,
+  },
+  hwss: {
+    grid: [
+      [-3, 0],
+      [-3, 1],
+      [-3, 2],
+      [-2, -1],
+      [-2, 2],
+      [-1, 2],
+      [0, -2],
+      [0, 2],
+      [1, -2],
+      [1, 2],
+      [2, 2],
+      [3, 1],
+      [3, -1],
+    ],
+    min_rows: 7,
+    min_cols: 9,
+  },
+  test: { grid: [[0, 0]], min_rows: 1, min_cols: 1 },
 };
 
 class GameOfLife extends Component {
@@ -115,7 +219,7 @@ class GameOfLife extends Component {
     grid: [],
     mouseDown: false,
     running: false,
-    timeOut: 500,
+    timeOut: 400,
     neighbours: [
       [1, 1],
       [1, 0],
@@ -132,7 +236,10 @@ class GameOfLife extends Component {
     let height;
     let width;
     const navHeight = $("#navBar").height();
-    const docHeight = Math.max($(document).height(), $(window).height());
+    // Just window height
+    const docHeight = Math.max($(window).height());
+    // maximum height
+    // const docHeight = Math.max($(document).height(), $(window).height());
 
     height = Math.floor((docHeight - navHeight) / GRIDSIZE) - 1;
 
@@ -148,7 +255,7 @@ class GameOfLife extends Component {
      * resetting app  */
     const dims = this.getWidthHeight();
     const grid = this.makeGrid(dims[0], dims[1]);
-    this.setState({ grid: grid, mouseDown: false, running: false });
+    this.setState({ grid: grid, mouseDown: false, running: false, dims: dims });
   }
 
   handleMouseDown(row, col) {
@@ -163,7 +270,7 @@ class GameOfLife extends Component {
   }
 
   setTimeOut() {
-    const new_time = 1000 - $("#time-out-slider").val();
+    const new_time = 800 - $("#time-out-slider").val();
     this.setState({ timeOut: new_time });
   }
 
@@ -190,7 +297,7 @@ class GameOfLife extends Component {
   }
 
   getMidPoint() {
-    const dims = this.getWidthHeight();
+    const dims = this.state.dims;
 
     const xCenter = Math.floor(dims[0] / 2);
     const yCenter = Math.floor(dims[1] / 2);
@@ -245,7 +352,7 @@ class GameOfLife extends Component {
     /** Counts number of direct neighbours to a cell that are alive on
      * a given grid.  Uses neighbours vector to store al permutations
      */
-    const dims = this.getWidthHeight();
+    const dims = this.state.dims;
     const neighbours = this.state.neighbours;
     let count = 0;
     for (let i = 0; i < 8; i++) {
@@ -271,7 +378,7 @@ class GameOfLife extends Component {
     if (!this.state.running) {
       return;
     }
-    const dims = this.getWidthHeight();
+    const dims = this.state.dims;
     let oldGrid = this.state.grid;
     let newGrid = [];
 
@@ -307,12 +414,20 @@ class GameOfLife extends Component {
   render() {
     /** render function - renders game of life on screen */
     const { grid } = this.state;
+
+    let dims;
+    if (typeof this.state.dims !== "undefined") {
+      dims = this.state.dims;
+    } else {
+      dims = this.getWidthHeight();
+    }
+
     return (
       <div>
         {/* Adding header component with Game of Life info */}
         <header>
           <Navbar
-            grid_wh={this.getWidthHeight()}
+            grid_dims={dims}
             pattern={(p) => this.handlePattern(p)}
             pattern_grid={PATTERN_GRIDS}
             reset={() => this.componentDidMount()}
