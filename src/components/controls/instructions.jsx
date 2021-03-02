@@ -29,6 +29,10 @@ class instructions extends Component {
               stop the game, and <code>Reset</code> to reset the board{" "}
             </li>
             <li>The speed of the animation can be changed in settings.</li>
+            <li>
+              Interesting well-known patterns can be loaded from the patterns
+              tab.
+            </li>
           </ul>
 
           <div class="alert alert-warning" role="alert">
