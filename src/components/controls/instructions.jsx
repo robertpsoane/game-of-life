@@ -12,11 +12,7 @@ class instructions extends Component {
         <Modal.Header>
           <Modal.Title>Instructions</Modal.Title>
         </Modal.Header>
-        <div class="alert alert-danger" role="alert">
-          Note: This version is currently under construction. The original
-          version can be found{" "}
-          <a href="https://robertsoane.me/game-of-life-v1/">here</a>.
-        </div>
+
         <Modal.Body>
           <ul>
             <li>Click on the cells in the grid to switch their state.</li>
@@ -34,8 +30,7 @@ class instructions extends Component {
             </li>
             <li>
               Interesting well-known patterns can be loaded from the{" "}
-              <code>Patterns</code>
-              tab.
+              <code>Patterns</code> tab.
             </li>
           </ul>
 
