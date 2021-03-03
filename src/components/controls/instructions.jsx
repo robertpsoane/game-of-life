@@ -35,7 +35,8 @@ class instructions extends Component {
           </ul>
 
           <div class="alert alert-warning" role="alert">
-            These instructions can be brought up again from the Settings menu.
+            These instructions can be accessed from the <code>Settings</code>{" "}
+            menu.
           </div>
         </Modal.Body>
         <Modal.Footer>

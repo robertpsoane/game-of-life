@@ -51,9 +51,6 @@ class About extends Component {
               <a href="https://robertpsoane.github.io/game-of-life-v1/">here</a>
               .
             </p>
-            <div class="alert alert-warning" role="alert">
-              Note: This is currently a work in progress.
-            </div>
           </div>
         </Modal.Body>
         <Modal.Footer>
